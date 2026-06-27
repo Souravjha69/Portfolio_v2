@@ -1,6 +1,7 @@
 import Hero from '@/components/sections/Hero'
 import ScatterProjects from '@/components/sections/ScatterProjects'
 import PinnedProjects from '@/components/sections/PinnedProjects'
+import RockEvolution from '@/components/sections/RockEvolutionLoader'
 import {
   AIStrip,
   Marquee,
@@ -8,6 +9,8 @@ import {
   Stats,
   Experience,
   Skills,
+  Certifications,
+  Publication,
   Services,
   Education,
   Testimonials,
@@ -20,6 +23,7 @@ export default function Home() {
   return (
     <main>
       <Hero />
+      <RockEvolution />
       <ScatterProjects />
       <PinnedProjects />
       <AIStrip />
@@ -28,6 +32,8 @@ export default function Home() {
       <Stats />
       <Experience />
       <Skills />
+      <Certifications />
+      <Publication />
       <Services />
       <Education />
       <Testimonials />

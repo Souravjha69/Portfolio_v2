@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useRef } from 'react'
 import { useGSAPReveal } from '@/hooks/useGSAP'
-import { skills, experience, services, education, testimonials } from '@/lib/data'
+import { skills, experience, services, education, testimonials, certifications, publication } from '@/lib/data'
 import Link from 'next/link'
 import { projects, stats, techStack } from '@/lib/data'
 
@@ -81,7 +81,7 @@ export function About() {
       <div className="section-line" />
       <div ref={ref} className="max-w-[1160px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 lg:gap-28 items-center">
         {/* Photo */}
-        <div className="reveal-left relative h-[260px] sm:h-[360px] md:h-[520px]">
+        <div className="reveal-left relative h-[280px] sm:h-[380px] md:h-[520px]">
           <div className="w-full h-full glass-card flex items-center justify-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-blue/[0.06] to-transparent" />
             <img src="/Sourav.jpg" alt="Sourav Kumar Jha" className="absolute inset-0 w-full h-full object-cover object-top z-10" />
@@ -254,7 +254,7 @@ export function Skills() {
           style={{ fontSize: 'clamp(1.9rem,4vw,3.8rem)' }}>
           Full Stack &<br /><span className="text-white/18">AI Capabilities</span>
         </h2>
-        <div className="reveal-grid grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.10] border border-white/[0.10] mt-10 sm:mt-14">
+        <div className="reveal-grid grid grid-cols-2 sm:grid-cols-3 gap-px bg-white/[0.10] border border-white/[0.10] mt-10 sm:mt-14">
           {skills.map((s) => (
             <div key={s.category} className="glass-panel p-5 sm:p-6 lg:p-8">
               <span className="text-[1.2rem] sm:text-[1.4rem] block mb-3 sm:mb-4">{s.icon}</span>
@@ -373,6 +373,62 @@ export function Testimonials() {
   )
 }
 
+/* ── CERTIFICATIONS ── */
+export function Certifications() {
+  const ref = useGSAPReveal()
+  return (
+    <section id="certifications" className="py-16 sm:py-20 lg:py-28 px-5 sm:px-8 lg:px-14 border-t border-white/[0.10] relative">
+      <div className="section-line" />
+      <div ref={ref} className="max-w-[1160px] mx-auto">
+        <span className="reveal block text-[0.63rem] font-bold tracking-[0.18em] uppercase text-white/42 mb-4">Certifications</span>
+        <h2 className="reveal font-syne font-black text-white mb-0 leading-[0.95] tracking-[-0.045em]"
+          style={{ fontSize: 'clamp(1.9rem,4vw,3.8rem)' }}>
+          Credentials &<br /><span className="text-white/18">Licences</span>
+        </h2>
+        <div className="reveal-grid grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/[0.10] border border-white/[0.10] mt-10 sm:mt-14">
+          {certifications.map((c) => (
+            <div key={c.title} className="glass-panel p-6 sm:p-8 lg:p-10 flex flex-col gap-3">
+              <span className="text-[1.4rem] sm:text-[1.5rem]">{c.icon}</span>
+              <div className="font-syne font-black text-white text-[0.92rem] sm:text-[0.98rem] leading-[1.3]">{c.title}</div>
+              <div className="text-[0.72rem] sm:text-[0.74rem] text-white/48 font-light">{c.issuer}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── PUBLICATION ── */
+export function Publication() {
+  const ref = useGSAPReveal()
+  return (
+    <section id="publication" className="py-16 sm:py-20 lg:py-28 px-5 sm:px-8 lg:px-14 border-t border-white/[0.10] relative">
+      <div className="section-line" />
+      <div ref={ref} className="max-w-[1160px] mx-auto">
+        <span className="reveal block text-[0.63rem] font-bold tracking-[0.18em] uppercase text-white/42 mb-4">Publication</span>
+        <h2 className="reveal font-syne font-black text-white mb-0 leading-[0.95] tracking-[-0.045em]"
+          style={{ fontSize: 'clamp(1.9rem,4vw,3.8rem)' }}>
+          Research &<br /><span className="text-white/18">Published Work</span>
+        </h2>
+        <div className="reveal mt-10 sm:mt-14 glass-card border border-white/[0.06] p-6 sm:p-8 lg:p-12 relative overflow-hidden">
+          <div className="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-blue via-violet to-transparent" />
+          <div className="pl-5 sm:pl-6">
+            <div className="text-[0.6rem] font-bold tracking-[0.14em] uppercase text-violet/70 mb-3">{publication.publisher}</div>
+            <div className="font-syne font-black text-white text-[1.1rem] sm:text-[1.3rem] lg:text-[1.5rem] leading-[1.2] tracking-[-0.03em] mb-1">
+              {publication.title}
+            </div>
+            <div className="text-[0.72rem] text-white/38 font-medium mb-5">{publication.subtitle}</div>
+            <p className="text-[0.8rem] sm:text-[0.84rem] text-white/60 font-light leading-[1.75] max-w-[720px]">
+              {publication.description}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* ── RESUME SECTION ── */
 export function ResumeSection() {
   const ref = useGSAPReveal()
@@ -395,7 +451,7 @@ export function ResumeSection() {
           </div>
 
           {/* Doc */}
-          <div className="bg-white text-[#111] p-5 sm:p-8 lg:p-12 font-grotesk no-print overflow-x-auto">
+          <div className="bg-white text-[#111] p-4 sm:p-8 lg:p-12 font-grotesk no-print overflow-x-auto">
             {/* Header */}
             <div className="flex flex-col sm:flex-row justify-between items-start pb-6 sm:pb-7 border-b-2 border-[#111] mb-6 sm:mb-8 gap-4 sm:gap-0">
               <div>
@@ -403,8 +459,8 @@ export function ResumeSection() {
                 <div className="text-[0.75rem] sm:text-[0.8rem] text-[#666] mt-[0.3rem]">Full Stack Engineer & AI Platform Developer · M.S. Machine Learning, Drexel University</div>
               </div>
               <div className="flex flex-col gap-1 sm:items-end">
-                {[['📍','Philadelphia, PA'],['📞','+1 215-240-9310'],['✉️','souravkumarjha301@gmail.com'],['💼','linkedin.com/in/souravkumarjha'],['🐙','github.com/souravkumarjha']].map(([i,v]) => (
-                  <div key={v} className="text-[0.65rem] sm:text-[0.7rem] text-[#888] flex items-center gap-1">{i}&ensp;{v}</div>
+                {[['📍','Philadelphia, PA'],['📞','+1 215-240-9310'],['✉️','souravkumarjha301@gmail.com'],['💼','linkedin.com/in/souravitachi'],['🐙','github.com/Souravjha69']].map(([i,v]) => (
+                  <div key={v} className="text-[0.62rem] sm:text-[0.7rem] text-[#888] flex items-center gap-1">{i}&ensp;{v}</div>
                 ))}
               </div>
             </div>
@@ -450,7 +506,7 @@ export function ResumeSection() {
             </div>
 
             {/* Education + Skills */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8 mb-6 sm:mb-7">
               <div>
                 <div className="font-syne font-black text-[0.65rem] tracking-[0.16em] uppercase text-[#111] mb-3 pb-1 border-b border-[#eee]">Education</div>
                 {[
@@ -462,14 +518,38 @@ export function ResumeSection() {
               <div>
                 <div className="font-syne font-black text-[0.65rem] tracking-[0.16em] uppercase text-[#111] mb-3 pb-1 border-b border-[#eee]">Technical Skills</div>
                 <div className="text-[0.72rem] sm:text-[0.74rem] text-[#555] leading-[1.9]">
-                  <div><strong className="text-[#111]">AI & LLM:</strong> OpenAI API, Prompt Engineering, Eval Frameworks, Deep Learning, RL</div>
-                  <div><strong className="text-[#111]">Backend:</strong> Node.js, Express.js, REST API, Microservices, Auth & Security</div>
-                  <div><strong className="text-[#111]">Frontend:</strong> React.js, HTML5, CSS3, Tailwind CSS, Next.js</div>
-                  <div><strong className="text-[#111]">Databases:</strong> MongoDB, SQL</div>
-                  <div><strong className="text-[#111]">DevOps:</strong> Docker, GitHub Actions, CI/CD, Git</div>
-                  <div><strong className="text-[#111]">Languages:</strong> JavaScript, Python, Java, Kotlin, C/C++</div>
+                  <div><strong className="text-[#111]">Backend & APIs:</strong> Node.js, Express.js, REST APIs, Microservices</div>
+                  <div><strong className="text-[#111]">Android:</strong> Android SDK, Android Studio, Jetpack, Kotlin, MVVM</div>
+                  <div><strong className="text-[#111]">Frontend:</strong> React.js, HTML5, CSS3, Tailwind CSS</div>
+                  <div><strong className="text-[#111]">DevOps:</strong> Docker, GitHub Actions, CI/CD, Postman, Git</div>
+                  <div><strong className="text-[#111]">Languages:</strong> Java, Kotlin, JavaScript, Python, SQL, C/C++</div>
+                  <div><strong className="text-[#111]">AI & ML:</strong> LLM APIs, Prompt Engineering, Deep Learning, RL</div>
                 </div>
               </div>
+            </div>
+
+            {/* Certifications */}
+            <div className="mb-6 sm:mb-7">
+              <div className="font-syne font-black text-[0.65rem] tracking-[0.16em] uppercase text-[#111] mb-3 pb-1 border-b border-[#eee]">Certifications</div>
+              <ul className="flex flex-col gap-1">
+                {[
+                  'Django for Everybody Specialization — University of Michigan',
+                  'AWS Cloud Technical Essentials — Amazon Web Services',
+                  'Java Programming: Solving Problems with Software — Duke University',
+                ].map((c, i) => (
+                  <li key={i} className="text-[0.72rem] sm:text-[0.74rem] text-[#555] leading-[1.6] pl-4 relative before:content-[\'▸\'] before:absolute before:left-0 before:text-[#bbb] before:text-[0.62rem] before:top-[0.1rem]">{c}</li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Publication */}
+            <div>
+              <div className="font-syne font-black text-[0.65rem] tracking-[0.16em] uppercase text-[#111] mb-3 pb-1 border-b border-[#eee]">Publication</div>
+              <div className="font-syne font-black text-[0.85rem] sm:text-[0.9rem] text-[#111] mb-[0.22rem]">Explainable AI for ML-Based Code Review Systems</div>
+              <div className="text-[0.7rem] text-[#666] mb-[0.4rem]">Independent Research Project · Springer LNNS, Volume 796</div>
+              <p className="text-[0.72rem] sm:text-[0.74rem] text-[#555] leading-[1.6]">
+                Integrated Explainable AI techniques with machine learning models to enhance transparency and interpretability in AI-powered code review systems.
+              </p>
             </div>
           </div>
         </div>
@@ -509,12 +589,12 @@ export function CTAStrip() {
 /* ── FOOTER ── */
 export function Footer() {
   return (
-    <footer className="px-5 sm:px-12 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-0 border-t border-white/[0.10]">
+    <footer className="px-5 sm:px-8 lg:px-12 py-8 sm:py-10 flex flex-col sm:flex-row items-center justify-between gap-5 sm:gap-0 border-t border-white/[0.10]">
       <div className="font-syne font-black text-white text-[1rem] tracking-[-0.04em]">Sourav.dev</div>
-      <div className="text-[0.7rem] text-white/38">© 2025 Sourav Kumar Jha</div>
-      <div className="flex gap-6">
+      <div className="text-[0.68rem] text-white/38 order-last sm:order-none">© 2026 Sourav Kumar Jha</div>
+      <div className="flex gap-5 sm:gap-6">
         {[['Work','/work'],['About','/about'],['Contact','/contact']].map(([l,h]) => (
-          <Link key={l} href={h} className="text-[0.7rem] text-white/38 hover:text-white transition-colors">{l}</Link>
+          <Link key={l} href={h} className="text-[0.68rem] sm:text-[0.7rem] text-white/38 hover:text-white transition-colors">{l}</Link>
         ))}
       </div>
     </footer>

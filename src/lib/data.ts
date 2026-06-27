@@ -44,9 +44,19 @@ export const skills = [
     items: ['React.js', 'HTML5 / CSS3', 'Tailwind CSS', 'Responsive Design', 'Next.js'],
   },
   {
-    category: 'Data & DevOps',
+    category: 'Android & Mobile',
+    icon: '📱',
+    items: ['Android SDK', 'Android Studio', 'Jetpack Components', 'Kotlin', 'MVVM Architecture', 'XML / Material UI'],
+  },
+  {
+    category: 'DevOps & Tools',
     icon: '🗄️',
     items: ['MongoDB', 'SQL', 'Docker', 'GitHub Actions', 'CI/CD', 'Postman', 'Git'],
+  },
+  {
+    category: 'Programming Languages',
+    icon: '💻',
+    items: ['JavaScript', 'Python', 'Java', 'Kotlin', 'SQL', 'C / C++'],
   },
 ]
 
@@ -218,3 +228,28 @@ export const availability = [
   { day: 'Saturday', status: 'closed' as const },
   { day: 'Sunday', status: 'closed' as const },
 ]
+
+export const certifications = [
+  {
+    icon: '🐍',
+    title: 'Django for Everybody Specialization',
+    issuer: 'University of Michigan',
+  },
+  {
+    icon: '☁️',
+    title: 'AWS Cloud Technical Essentials',
+    issuer: 'Amazon Web Services',
+  },
+  {
+    icon: '☕',
+    title: 'Java Programming: Solving Problems with Software',
+    issuer: 'Duke University',
+  },
+]
+
+export const publication = {
+  title: 'Explainable AI for ML-Based Code Review Systems',
+  subtitle: 'Independent Research Project',
+  publisher: 'Springer LNNS, Volume 796',
+  description: 'Integrated Explainable AI techniques with machine learning models to enhance transparency and interpretability in AI-powered code review systems, identifying key factors influencing automated review decisions and improving model reliability and developer trust.',
+}
