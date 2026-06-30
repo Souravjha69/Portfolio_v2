@@ -46,52 +46,57 @@ function LargeCodeEditor({ accent }: { accent: string }) {
   )
 }
 
-function LargeChat({ accent }: { accent: string }) {
-  const msgs = [
-    { role: 'user', text: 'Explain how the auth middleware works' },
-    { role: 'ai',   text: "The auth middleware validates JWT tokens on each request, checking expiry and signature before passing to the route handler." },
-    { role: 'user', text: 'Can you also add rate limiting?' },
-    { role: 'ai',   text: "Absolutely — I'll integrate express-rate-limit with Redis-backed storage for distributed rate limiting across instances." },
+function LargeResumeScore({ accent }: { accent: string }) {
+  const dims = [
+    { label: 'Contact Info',       score: 7,  max: 10 },
+    { label: 'Key Sections',       score: 16, max: 20 },
+    { label: 'Keyword Match',      score: 15, max: 25 },
+    { label: 'Content Length',     score: 11, max: 15 },
+    { label: 'Action Verbs',       score: 10, max: 15 },
+    { label: 'Quantified Results', score: 8,  max: 15 },
   ]
+  const found   = ['React 19', 'FastAPI', 'TF-IDF', 'Scikit-learn']
+  const missing = ['Docker', 'GraphQL']
   return (
     <div className="w-full rounded-xl overflow-hidden shadow-2xl"
          style={{ background: 'rgba(8,4,20,0.75)', border: '1px solid rgba(255,255,255,0.09)', backdropFilter: 'blur(20px)' }}>
       {/* header */}
-      <div className="px-4 py-3 border-b flex items-center gap-2.5" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
-        <div className="w-7 h-7 rounded-full grid place-items-center text-[0.55rem] font-black"
-             style={{ background: accent + '25', border: `1px solid ${accent}40`, color: accent }}>AI</div>
+      <div className="px-4 py-3 border-b flex items-center justify-between" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
         <div>
-          <div className="text-[0.6rem] font-semibold" style={{ color: 'rgba(255,255,255,0.65)' }}>Virtual AI Assistant</div>
-          <div className="text-[0.48rem]" style={{ color: accent }}>● online · LLM-powered</div>
+          <div className="text-[0.6rem] font-semibold" style={{ color: 'rgba(255,255,255,0.65)' }}>RE-SCAN Intelligence Report</div>
+          <div className="text-[0.48rem]" style={{ color: accent }}>● 100% local · zero data leaves the machine</div>
+        </div>
+        <div className="text-right flex-shrink-0">
+          <div className="text-[1.1rem] font-black leading-none" style={{ color: accent }}>76<span className="text-[0.55rem] font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}>/100</span></div>
+          <div className="text-[0.44rem]" style={{ color: 'rgba(255,255,255,0.25)' }}>ATS Score</div>
         </div>
       </div>
-      {/* messages */}
-      <div className="px-4 py-4 space-y-3">
-        {msgs.map((m, i) => (
-          <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'gap-2 items-end'}`}>
-            {m.role === 'ai' && (
-              <div className="w-5 h-5 rounded-full flex-shrink-0 grid place-items-center text-[0.4rem] font-black"
-                   style={{ background: accent + '22', color: accent }}>AI</div>
-            )}
-            <div className="text-[0.58rem] leading-relaxed max-w-[82%] px-3 py-2 rounded-2xl"
-                 style={m.role === 'user'
-                   ? { background: 'rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.65)', borderRadius: '16px 16px 4px 16px' }
-                   : { background: 'rgba(0,0,0,0.35)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.5)', borderRadius: '4px 16px 16px 16px' }
-                 }>
-              {m.text}
+      {/* breakdown bars */}
+      <div className="px-4 py-4 space-y-2.5">
+        {dims.map(d => (
+          <div key={d.label}>
+            <div className="flex justify-between text-[0.5rem] mb-1" style={{ color: 'rgba(255,255,255,0.42)' }}>
+              <span>{d.label}</span><span style={{ color: 'rgba(255,255,255,0.25)' }}>{d.score}/{d.max}</span>
+            </div>
+            <div className="h-[4px] rounded-full" style={{ background: 'rgba(255,255,255,0.07)' }}>
+              <div className="h-full rounded-full" style={{ width: `${(d.score / d.max) * 100}%`, background: accent }} />
             </div>
           </div>
         ))}
-        {/* typing */}
-        <div className="flex items-center gap-2 pl-7">
-          <div className="flex gap-1">
-            {[0,1,2].map(d => (
-              <div key={d} className="w-[5px] h-[5px] rounded-full animate-pulse"
-                   style={{ background: accent + '55', animationDelay: `${d * 0.18}s` }} />
-            ))}
-          </div>
-          <span className="text-[0.47rem]" style={{ color: 'rgba(255,255,255,0.2)' }}>Generating response…</span>
-        </div>
+      </div>
+      {/* keyword chips */}
+      <div className="px-4 pb-3 flex flex-wrap gap-1.5">
+        {found.map(k => (
+          <span key={k} className="text-[0.48rem] font-semibold px-2 py-0.5 rounded" style={{ background: accent + '20', color: accent, border: `1px solid ${accent}35` }}>{k}</span>
+        ))}
+        {missing.map(k => (
+          <span key={k} className="text-[0.48rem] font-semibold px-2 py-0.5 rounded line-through" style={{ background: 'rgba(248,113,113,0.1)', color: '#f87171', border: '1px solid rgba(248,113,113,0.25)' }}>{k}</span>
+        ))}
+      </div>
+      {/* footer */}
+      <div className="px-4 py-2 border-t flex justify-between" style={{ borderColor: 'rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)' }}>
+        <span className="text-[0.52rem] font-mono" style={{ color: 'rgba(255,255,255,0.18)' }}>FastAPI · Scikit-learn · TF-IDF</span>
+        <span className="text-[0.52rem]" style={{ color: accent }}>JD Match 82%</span>
       </div>
     </div>
   )
@@ -184,7 +189,9 @@ function LargeAPI({ accent }: { accent: string }) {
   )
 }
 
-const LARGE_VISUALS = [LargeCodeEditor, LargeChat, LargePayment, LargeAPI]
+const LARGE_VISUALS = [LargeCodeEditor, LargeResumeScore, LargePayment, LargeAPI]
+
+const FEATURED_IDS = ['01', '06', '03', '04']
 
 export default function PinnedProjects() {
   const innerRefs = useRef<(HTMLDivElement | null)[]>([])
@@ -213,9 +220,11 @@ export default function PinnedProjects() {
     init()
   }, [])
 
+  const featured = FEATURED_IDS.map(id => projects.find(p => p.id === id)!)
+
   return (
-    <div style={{ height: `${projects.length * 100}vh` }}>
-      {projects.map((p, i) => {
+    <div style={{ height: `${featured.length * 100}vh` }}>
+      {featured.map((p, i) => {
         const s       = PANEL_STYLES[i]
         const Visual  = LARGE_VISUALS[i]
         return (
@@ -243,7 +252,7 @@ export default function PinnedProjects() {
                   {/* top bar */}
                   <div className="flex items-start justify-between">
                     <span className="text-[0.5rem] font-bold tracking-[0.26em] uppercase" style={{ color: 'rgba(255,255,255,0.18)' }}>
-                      {p.id} — {String(projects.length).padStart(2, '0')}
+                      {p.id} — {String(featured.length).padStart(2, '0')}
                     </span>
                     <div className="flex gap-2 flex-wrap justify-end lg:hidden">
                       {p.tags.map(t => (

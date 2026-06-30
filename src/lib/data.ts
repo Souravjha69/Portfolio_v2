@@ -132,6 +132,28 @@ export const projects = [
     longDesc: 'Scalable full-stack applications for client-facing & internal workflows. AI-augmented backend services, secure auth patterns & CI/CD via GitHub Actions for high-availability production deployment.',
     techFull: ['Full Stack', 'AI', 'CI/CD', 'Docker'],
   },
+  {
+    id: '05',
+    icon: '📊',
+    title: 'CSV Whisperer',
+    description: 'Chat with any CSV file using AI — instant BM25 search across the full dataset, exact computed statistics & Groq-LLM answers in plain English.',
+    tags: ['Next.js', 'Groq API', 'BM25'],
+    category: ['ai', 'fullstack'],
+    year: '2026',
+    longDesc: 'Upload any CSV and ask questions in plain English. A pure-JavaScript BM25 index covers every row instantly with no model download, while min/max/average/sum/unique stats are computed over the entire dataset — never guessed from a sample. Groq’s LLM writes answers in whatever format you ask for; CSV parsing and search run entirely in the browser, with rows sent to Groq only when answering a question.',
+    techFull: ['Next.js 15', 'TypeScript', 'Tailwind CSS', 'PapaParse', 'Groq API'],
+  },
+  {
+    id: '06',
+    icon: '📄',
+    title: 'RE-SCAN — ML Resume Analyser',
+    description: 'AI resume analyser that scores resumes against ATS systems, matches them to job descriptions via TF-IDF similarity & surfaces prioritized tips — 100% local.',
+    tags: ['React', 'FastAPI', 'ML'],
+    category: ['ai', 'fullstack'],
+    year: '2026',
+    longDesc: 'Full-stack resume intelligence platform that runs entirely on the local machine, with zero data leaving it. A Scikit-learn classifier trained on 25 job categories scores resumes across 6 weighted ATS dimensions, while a TF-IDF cosine-similarity engine matches resumes against job descriptions for keyword alignment and a JD match score. FastAPI backend, React 19 + TanStack Router frontend, with improvement tips ranked critical → success.',
+    techFull: ['React 19', 'FastAPI', 'Scikit-learn', 'TF-IDF', 'Sentence Transformers', 'Tailwind CSS'],
+  },
 ]
 
 export const services = [

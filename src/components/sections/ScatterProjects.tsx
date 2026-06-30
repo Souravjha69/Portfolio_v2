@@ -48,41 +48,48 @@ function CodeEditorMockup({ accent }: { accent: string }) {
   )
 }
 
-function ChatMockup({ accent }: { accent: string }) {
+function ResumeScoreMockup({ accent }: { accent: string }) {
+  const dims = [
+    { label: 'Keyword Match', pct: 60 },
+    { label: 'Key Sections',  pct: 80 },
+    { label: 'Action Verbs',  pct: 67 },
+  ]
+  const found   = ['React 19', 'FastAPI', 'TF-IDF']
+  const missing = ['Docker']
   return (
-    <div className="w-full max-w-[240px] lg:max-w-[290px] space-y-2">
-      {/* user bubble */}
-      <div className="flex justify-end">
-        <div className="px-3 py-2 rounded-2xl rounded-tr-sm text-[0.58rem] max-w-[78%]"
-             style={{ background: 'rgba(255,255,255,0.1)', border: '1px solid rgba(255,255,255,0.1)', color: 'rgba(255,255,255,0.65)' }}>
-          How do I optimize this query?
-        </div>
+    <div className="w-full max-w-[240px] lg:max-w-[290px] rounded-lg overflow-hidden"
+         style={{ background: 'rgba(0,0,0,0.45)', border: '1px solid rgba(255,255,255,0.09)', backdropFilter: 'blur(12px)' }}>
+      {/* header */}
+      <div className="flex items-center justify-between px-3 py-2 border-b" style={{ borderColor: 'rgba(255,255,255,0.07)' }}>
+        <span className="text-[0.5rem] font-bold tracking-widest uppercase" style={{ color: 'rgba(255,255,255,0.3)' }}>ATS Score</span>
+        <span className="text-[0.7rem] font-black" style={{ color: accent }}>76<span className="text-[0.5rem] font-normal" style={{ color: 'rgba(255,255,255,0.3)' }}>/100</span></span>
       </div>
-      {/* AI response */}
-      <div className="flex gap-2 items-end">
-        <div className="w-6 h-6 rounded-full flex-shrink-0 grid place-items-center text-[0.45rem] font-bold"
-             style={{ background: accent + '28', border: `1px solid ${accent}44`, color: accent }}>AI</div>
-        <div className="px-3 py-2 rounded-2xl rounded-bl-sm text-[0.55rem] leading-relaxed max-w-[82%]"
-             style={{ background: 'rgba(0,0,0,0.4)', border: '1px solid rgba(255,255,255,0.09)', color: 'rgba(255,255,255,0.52)', backdropFilter: 'blur(10px)' }}>
-          I found <span style={{ color: accent }}>3 optimizations</span> — adding index on userId reduces latency by 68%.
-        </div>
+      {/* score bars */}
+      <div className="px-3 py-3 space-y-2">
+        {dims.map(d => (
+          <div key={d.label}>
+            <div className="flex justify-between text-[0.46rem] mb-1" style={{ color: 'rgba(255,255,255,0.4)' }}>
+              <span>{d.label}</span><span>{d.pct}%</span>
+            </div>
+            <div className="h-[3px] rounded-full" style={{ background: 'rgba(255,255,255,0.08)' }}>
+              <div className="h-full rounded-full" style={{ width: `${d.pct}%`, background: accent }} />
+            </div>
+          </div>
+        ))}
       </div>
-      {/* typing dots */}
-      <div className="flex items-center gap-2 pl-8">
-        <div className="flex gap-[3px]">
-          {[0.0, 0.15, 0.3].map(d => (
-            <div key={d} className="w-[5px] h-[5px] rounded-full animate-pulse"
-                 style={{ background: accent + '60', animationDelay: `${d}s` }} />
-          ))}
-        </div>
-        <span className="text-[0.47rem]" style={{ color: 'rgba(255,255,255,0.2)' }}>AI is thinking…</span>
+      {/* keyword chips */}
+      <div className="px-3 pb-3 flex flex-wrap gap-1">
+        {found.map(k => (
+          <span key={k} className="text-[0.44rem] font-semibold px-1.5 py-0.5 rounded" style={{ background: accent + '22', color: accent }}>{k}</span>
+        ))}
+        {missing.map(k => (
+          <span key={k} className="text-[0.44rem] font-semibold px-1.5 py-0.5 rounded line-through" style={{ background: 'rgba(248,113,113,0.12)', color: '#f87171' }}>{k}</span>
+        ))}
       </div>
-      {/* model tag */}
-      <div className="flex justify-center pt-1">
-        <span className="text-[0.44rem] tracking-widest uppercase px-2 py-0.5 rounded-full"
-              style={{ background: accent + '15', color: accent + '90', border: `1px solid ${accent}25` }}>
-          LLM · Node.js · MongoDB
-        </span>
+      {/* footer */}
+      <div className="flex items-center justify-between px-3 py-1.5 border-t" style={{ borderColor: 'rgba(255,255,255,0.06)', background: 'rgba(0,0,0,0.3)' }}>
+        <span className="text-[0.48rem] font-mono" style={{ color: 'rgba(255,255,255,0.18)' }}>scikit-learn · 100% local</span>
+        <span className="text-[0.48rem] font-bold" style={{ color: accent }}>JD 82%</span>
       </div>
     </div>
   )
@@ -164,7 +171,9 @@ function APIMockup({ accent }: { accent: string }) {
   )
 }
 
-const VISUALS = [CodeEditorMockup, ChatMockup, PaymentMockup, APIMockup]
+const VISUALS = [CodeEditorMockup, ResumeScoreMockup, PaymentMockup, APIMockup]
+
+const FEATURED_IDS = ['01', '06', '03', '04']
 
 export default function ScatterProjects() {
   const sectionRef  = useRef<HTMLElement>(null)
@@ -221,7 +230,8 @@ export default function ScatterProjects() {
       <div className="sticky top-0 h-screen overflow-hidden bg-black">
 
         <div className="absolute inset-0 grid grid-cols-2 grid-rows-2" style={{ gap: '2px' }}>
-          {projects.map((p, i) => {
+          {FEATURED_IDS.map((id, i) => {
+            const p = projects.find(proj => proj.id === id)!
             const cfg     = CONFIGS[i]
             const Visual  = VISUALS[i]
             return (
